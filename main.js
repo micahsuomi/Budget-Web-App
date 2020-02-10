@@ -185,24 +185,20 @@ const loadDate = () => {
 
     warning.setAttribute('class', 'warning');
 
-    selectionInput.addEventListener('focus', () => {
-        console.log('testing')
+    selectionInput.addEventListener('change', () => {
+
         if(selectionInput.value === 'income') {
             selectionInput.style.outline = '2px solid rgb(85, 165, 197)';
             descriptionInput.style.outline = '2px solid rgb(85, 165, 197)';
             amountInput.style.outline = '2px solid rgb(85, 165, 197)';
 
-
-
             console.log(selectionInput.value)
 
         } else if(selectionInput.value === 'expense') {
-            selectionInput.style.outline = '2px solid rgb(187, 47, 66)';
-            descriptionInput.style.outline = '2px solid rgb(187, 47, 66)';
-            amountInput.style.outline = '2px solid rgb(187, 47, 66)';
-            addIncomeExpenseBtn.style.backgroundColor = 'rgb(187, 47, 66)';
-            addIncomeExpenseBtn.classList.add('expense-btn');
-            console.log(selectionInput.value)
+            selectionInput.style.outline = '2px solid rgb(250, 71, 101)';
+            descriptionInput.style.outline = '2px solid rgb(250, 71, 101)';
+            amountInput.style.outline = '2px solid rgb(250, 71, 101)';
+            addIncomeExpenseBtn.style.backgroundColor = 'rgb(250, 71, 101)';
 
 
         }
