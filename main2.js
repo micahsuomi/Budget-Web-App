@@ -185,28 +185,27 @@ const loadDate = () => {
 
     warning.setAttribute('class', 'warning');
 
-    selectionInput.addEventListener('focus', () => {
-        console.log('testing')
+selectionInput.addEventListener('change', () => {
+
         if(selectionInput.value === 'income') {
             selectionInput.style.outline = '2px solid rgb(85, 165, 197)';
             descriptionInput.style.outline = '2px solid rgb(85, 165, 197)';
             amountInput.style.outline = '2px solid rgb(85, 165, 197)';
-
-
-
-            console.log(selectionInput.value)
+            addIncomeExpenseBtn.classList.add('income-btn');
+            addIncomeExpenseBtn.classList.remove('expense-btn');
 
         } else if(selectionInput.value === 'expense') {
-            selectionInput.style.outline = '2px solid rgb(187, 47, 66)';
-            descriptionInput.style.outline = '2px solid rgb(187, 47, 66)';
-            amountInput.style.outline = '2px solid rgb(187, 47, 66)';
-            addIncomeExpenseBtn.style.backgroundColor = 'rgb(187, 47, 66)';
+            selectionInput.style.outline = '2px solid rgb(250, 71, 101)';
+            descriptionInput.style.outline = '2px solid rgb(250, 71, 101)';
+            amountInput.style.outline = '2px solid rgb(250, 71, 101)';
             addIncomeExpenseBtn.classList.add('expense-btn');
-            console.log(selectionInput.value)
+            addIncomeExpenseBtn.classList.remove('income-btn');
+
 
 
         }
     })
+
 
     addIncomeExpenseBtn.addEventListener('click', validateInput = () => {
 
@@ -252,27 +251,29 @@ const loadDate = () => {
     const displayAccount = () => {
         incomeWrapper.textContent = '';
         expensesWrapper.textContent = '';
-        let incomeContent = '';
-        let expensesContent = '';
+        totalIncome.textContent = personAccount.totalIncome();
+        incomeToExpensesPercentage.textContent = `${personAccount.expensesToIncome()}%`;
+        totalExpenses.textContent = personAccount.totalExpenses();
+                    
 
         // let expensesContent = '';
         
         for(const person in personAccount.income) {
             let income = personAccount.income[person];
             let {description, amount, date} = income
-        
+        /*
             incomeContent += 
                     `<div class="income-expenses-div income-div">
                     <p>${description}</p>
                     <p class="income">€${amount}</p>
                     <p>${date}</p>
                     <div class="deleteBtnContainer">
-                    <i class="fas fa-trash" onclick="removeIncomeUI()"></i>
+                    <i class="fas fa-trash" onclick="() => removeIncomeUI()"></i>
                     </div>
                     </div>`
-            incomeWrapper.innerHTML = incomeContent;
+            incomeWrapper.innerHTML = incomeContent;*/
             
-           /*
+           
             let incomeDiv = document.createElement('div');
             let incomeType = document.createElement('p');
             let incomeAmount = document.createElement('p');
@@ -291,18 +292,18 @@ const loadDate = () => {
 
             deleteBtnContainer.append(deleteBtn);
             incomeDiv.append(incomeType, incomeAmount, timeRecorded, deleteBtnContainer);
-            incomeWrapper.append(incomeDiv);*/
-    
+            incomeWrapper.append(incomeDiv);
+           
             
-            totalIncome.textContent = personAccount.totalIncome();
-            incomeToExpensesPercentage.textContent = `${personAccount.expensesToIncome()}%`;
             // const deleteBtn = document.querySelector('.fa-times-circle');
 
-             removeIncomeUI = () => {
+            deleteBtn.addEventListener('click', removeIncomeUI = () => {
+
                 personAccount.removeIncome(income);
                 displayAccount();
-            
-            }
+                console.log(personAccount.income)
+
+            });
            
         }
              for(const person in personAccount.expenses) {
@@ -341,14 +342,13 @@ const loadDate = () => {
                     deleteBtnContainer.append(deleteBtn);
                     expensesDiv.append(expensesType, expensesAmount, timeRecorded, deleteBtnContainer);
                     expensesWrapper.append(expensesDiv);
-
-                    totalExpenses.textContent = personAccount.totalExpenses();
                     
                     // deleteBtn = document.querySelector('.fa-trash');
                     deleteBtn.addEventListener('click', removeExpenseUI = () => {
 
                         personAccount.removeExpense(expenses);
                         displayAccount();
+                        console.log(personAccount.expenses)
 
                     });
      
@@ -394,11 +394,15 @@ const loadDate = () => {
 
     
     
-    const personAccountJson = JSON.stringify(personAccount);
-    localStorage.setItem('personAccount', personAccountJson);
+   
+    const accountJson = JSON.stringify(personAccount);
+    localStorage.setItem('personAccount', accountJson);
+    console.log(accountJson)
 
-    const testAccountJson = JSON.parse(localStorage.getItem('personAccount'));
-    console.log(testAccountJson)
+    let personAccountJson = JSON.parse(localStorage.getItem('personAccount'));
+    console.log(personAccount);
+    console.log(personAccountJson);
+  
     displayName();
     displayAccount();
 

@@ -106,6 +106,7 @@ const loadDate = () => {
                     income.splice(index, 1);
             
                 }
+                displayAccount()
         
                 
             },
@@ -191,14 +192,16 @@ const loadDate = () => {
             selectionInput.style.outline = '2px solid rgb(85, 165, 197)';
             descriptionInput.style.outline = '2px solid rgb(85, 165, 197)';
             amountInput.style.outline = '2px solid rgb(85, 165, 197)';
-
-            console.log(selectionInput.value)
+            addIncomeExpenseBtn.classList.add('income-btn');
+            addIncomeExpenseBtn.classList.remove('expense-btn');
 
         } else if(selectionInput.value === 'expense') {
             selectionInput.style.outline = '2px solid rgb(250, 71, 101)';
             descriptionInput.style.outline = '2px solid rgb(250, 71, 101)';
             amountInput.style.outline = '2px solid rgb(250, 71, 101)';
-            addIncomeExpenseBtn.style.backgroundColor = 'rgb(250, 71, 101)';
+            addIncomeExpenseBtn.classList.add('expense-btn');
+            addIncomeExpenseBtn.classList.remove('income-btn');
+
 
 
         }
@@ -225,7 +228,7 @@ const loadDate = () => {
 
         if(selectionInput.value === 'income') {
             selectionInput.style.outline = '2px solid rgb(85, 165, 197)';
-            personAccount.addIncome();
+            personAccountJson.addIncome();
 
         } else if(selectionInput.value === 'expense') {
             personAccount.addExpense();
@@ -252,7 +255,7 @@ const loadDate = () => {
         let expensesContent = '';
 
         // let expensesContent = '';
-        
+
         for(const person in personAccount.income) {
             let income = personAccount.income[person];
             let {description, amount, date} = income
@@ -310,13 +313,6 @@ const loadDate = () => {
         }
 
      
-
-    
-    const personAccountJson = JSON.stringify(personAccount);
-    localStorage.setItem('personAccount', personAccountJson);
-
-    const testAccountJson = JSON.parse(localStorage.getItem('personAccount'));
-    console.log(testAccountJson)
     displayName();
     displayAccount();
 

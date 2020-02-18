@@ -27,9 +27,9 @@
             <form class="form">
 
             <div class="income-inputs__wrapper">
-                <input type="text" placeholder="Description" class="type" required/>
-                <input type="number" placeholder="Amount €" class="amount" required/>
-                <select name="type" class="income-expenses-selection" required>
+                <input type="text" placeholder="Description" class="type"/>
+                <input type="number" placeholder="Amount €" class="amount"/>
+                <select name="type" class="income-expenses-selection">
                     <option value="---select">---select</option>
                     <option value="income" class="income-selection">Income +</option>
                     <option value="expense" class="expense-selection">Expense -</option>
@@ -49,7 +49,7 @@
             <div class="income-container">
                 <div class="income-header">
                 <p class="total-income__paragraph">Total income: €<span class="total-income"></span></p>
-                </div>
+                <p class="income-to-balance__percentage">0%</p></div>
                 <div class="income-wrapper"></div>
         </div>
 
@@ -61,8 +61,14 @@
     </div>
   
     </div>
+
+    <div class="clear-local-storage__btn-wrapper">
+    </div>
     </div>
 
-    <script src='main.js'></script>
+    <!-- <script src='main.js'></script>  -->
+    <script src='main2.js'></script>
+     <!-- <script src="main3.js"></script>   -->
+
 </body>
 </html>
