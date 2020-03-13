@@ -180,7 +180,7 @@ const loadDate = () => {
     }, 1000);
 
 
-
+console.log('hello')
     currentDate.setAttribute('class', 'date');
     dateParagraph.append(currentDate);
 
@@ -196,15 +196,14 @@ const loadDate = () => {
             addIncomeExpenseBtn.classList.remove('expense-btn');
 
         } else if(selectionInput.value === 'expense') {
+
             selectionInput.style.outline = '2px solid rgb(250, 71, 101)';
             descriptionInput.style.outline = '2px solid rgb(250, 71, 101)';
             amountInput.style.outline = '2px solid rgb(250, 71, 101)';
             addIncomeExpenseBtn.classList.add('expense-btn');
             addIncomeExpenseBtn.classList.remove('income-btn');
 
-
-
-        }
+        } 
     })
 
     addIncomeExpenseBtn.addEventListener('click', validateInput = () => {

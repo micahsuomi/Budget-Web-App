@@ -16,8 +16,7 @@ const loadDate = () => {
 }
 
      personAccount = {
-            firstName: "Jon",
-            lastName: "Doe",
+            name: "",
             income: [{
                 description: 'Salary',
                 amount: 4000,
@@ -55,6 +54,12 @@ const loadDate = () => {
 
             }
         ],
+
+            addName: function() {
+                personAccount.name = nameInput.value;
+                console.log(personAccount)
+
+            },
 
             addIncome: function() {
             let income = personAccount.income;
@@ -142,6 +147,9 @@ const loadDate = () => {
          
     const accountBalance = document.querySelector('.account-balance');
     const accountName = document.querySelector('.account-name');
+    const nameInput = document.querySelector('.name-input');
+    const addNameBtn = document.querySelector('.add-name__btn');
+
     const dateParagraph = document.querySelector('.date-paragraph');
     const currentDate = document.querySelector('.current-date');
 
@@ -166,7 +174,7 @@ const loadDate = () => {
     });
 
 
-
+    
     totalIncome.setAttribute('class', 'total-income');
 
     const calculatePercentage = () => accountBalance / totalExpenses * 100;
@@ -201,7 +209,13 @@ selectionInput.addEventListener('change', () => {
             addIncomeExpenseBtn.classList.add('expense-btn');
             addIncomeExpenseBtn.classList.remove('income-btn');
 
-
+        } else {
+            console.log(selectionInput.value)
+            selectionInput.style.outline = 'none';
+            descriptionInput.style.outline = 'none';
+            amountInput.style.outline = 'none';
+            addIncomeExpenseBtn.classList.remove('expense-btn');
+            addIncomeExpenseBtn.classList.remove('income-btn');
 
         }
     })
@@ -241,12 +255,18 @@ selectionInput.addEventListener('change', () => {
     })
 
 
-    const displayName = () => {
+    addNameBtn.addEventListener('click', ()=> {
+        personAccount.addName();
+        accountName.textContent = personAccount.name;
+        addNameBtn.classList.add('hide');
+        nameInput.classList.add('hide'); 
        
-            accountName.textContent = `${personAccount.firstName} ${personAccount.lastName}`; 
+    }) 
+       
+            
              
         
-    }
+    
 
     const displayAccount = () => {
         incomeWrapper.textContent = '';
@@ -403,7 +423,6 @@ selectionInput.addEventListener('change', () => {
     console.log(personAccount);
     console.log(personAccountJson);
   
-    displayName();
     displayAccount();
 
    
