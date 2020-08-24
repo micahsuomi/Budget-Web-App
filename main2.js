@@ -57,7 +57,7 @@ const loadDate = () => {
 
             addName: function() {
                 personAccount.name = nameInput.value;
-                console.log(personAccount)
+               
 
             },
 
@@ -138,6 +138,10 @@ const loadDate = () => {
                 let totalIncome = this.totalIncome();
                 let totalExpenses = this.totalExpenses();
                 let percentage = Math.floor(totalExpenses / totalIncome * 100);
+                // if(totalExpenses < 1 && totalIncome < 1) {
+                //     console.log('here')
+                //     percentage = 0
+                // }
                 return percentage;
             }
           
@@ -149,6 +153,7 @@ const loadDate = () => {
     const accountName = document.querySelector('.account-name');
     const nameInput = document.querySelector('.name-input');
     const addNameBtn = document.querySelector('.add-name__btn');
+    const acountNameWarning = document.querySelector('.account-name__warning');
 
     const dateParagraph = document.querySelector('.date-paragraph');
     const currentDate = document.querySelector('.current-date');
@@ -256,10 +261,16 @@ selectionInput.addEventListener('change', () => {
 
 
     addNameBtn.addEventListener('click', ()=> {
+        if(nameInput.value.length < 1) {
+            acountNameWarning.textContent = 'please enter a name';
+        } else {
         personAccount.addName();
         accountName.textContent = personAccount.name;
         addNameBtn.classList.add('hide');
         nameInput.classList.add('hide'); 
+        acountNameWarning.textContent = '';
+        
+        }
        
     }) 
        
@@ -272,7 +283,15 @@ selectionInput.addEventListener('change', () => {
         incomeWrapper.textContent = '';
         expensesWrapper.textContent = '';
         totalIncome.textContent = personAccount.totalIncome();
-        incomeToExpensesPercentage.textContent = `${personAccount.expensesToIncome()}%`;
+        if(personAccount.expenses.length < 1 && personAccount.income.length < 1) {
+            console.log('all empty')
+            incomeToExpensesPercentage.textContent = '0%';
+        } else {
+            incomeToExpensesPercentage.textContent = `${personAccount.expensesToIncome()}%`;
+            incomeToExpensesPercentage.classList.add('show');
+
+
+        }
         totalExpenses.textContent = personAccount.totalExpenses();
                     
 
